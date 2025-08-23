@@ -1,3 +1,5 @@
+# if you have to make any tool you haveto make class 
+
 from crewai.tools import BaseTool
 from typing import Type
 from pydantic import BaseModel, Field

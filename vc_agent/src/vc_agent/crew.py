@@ -6,6 +6,7 @@ from typing import List
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
+# By default it makes a class named as project name
 @CrewBase
 class VcAgent():
     """VcAgent crew"""
@@ -20,22 +21,23 @@ class VcAgent():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def researcher(self) -> Agent:     # it means we are putting a limit on researcher , i.e it should return only an Agent
         return Agent(
             config=self.agents_config['researcher'], # type: ignore[index]
-            verbose=True
+            verbose=True               # Show more detailed logs while running
         )
 
-    @agent
+    @agent    # it is decorator
     def reporting_analyst(self) -> Agent:
         return Agent(
             config=self.agents_config['reporting_analyst'], # type: ignore[index]
-            verbose=True
+            verbose=True         # it will show log files in output
         )
 
     # To learn more about structured task outputs,
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
+    
     @task
     def research_task(self) -> Task:
         return Task(
@@ -49,7 +51,7 @@ class VcAgent():
             output_file='report.md'
         )
 
-    @crew
+    @crew                # combination of agents
     def crew(self) -> Crew:
         """Creates the VcAgent crew"""
         # To learn how to add knowledge sources to your crew, check out the documentation:
