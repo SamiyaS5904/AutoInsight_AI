@@ -1,3 +1,5 @@
+# DEFAULT CODE FOR ALL AGENTS 
+
 researcher:
   role: >
     {topic} Senior Data Researcher
