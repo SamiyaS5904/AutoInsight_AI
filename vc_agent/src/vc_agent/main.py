@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-import sys
+
+# We have installed boto3 it helps to show outputs in console
+
+import sys        #sys - system
 import warnings
 
 from datetime import datetime
@@ -18,20 +21,21 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'AI LLMs',
+        'topic': 'input("Enter Cars to Compare(eg. Car A vs Car B)")',
         'current_year': str(datetime.now().year)
     }
     
     try:
-        VcAgent().crew().kickoff(inputs=inputs)
+        VcAgent().crew().kickoff(inputs=inputs)      #input becomes tasks and become topic and then is used in agents.yaml
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
-
+# for this project we dont want to use all these remaining ones 
+"""
 def train():
-    """
+    
     Train the crew for a given number of iterations.
-    """
+   
     inputs = {
         "topic": "AI LLMs",
         'current_year': str(datetime.now().year)
@@ -43,9 +47,9 @@ def train():
         raise Exception(f"An error occurred while training the crew: {e}")
 
 def replay():
-    """
+    
     Replay the crew execution from a specific task.
-    """
+    
     try:
         VcAgent().crew().replay(task_id=sys.argv[1])
 
@@ -53,9 +57,9 @@ def replay():
         raise Exception(f"An error occurred while replaying the crew: {e}")
 
 def test():
-    """
+    
     Test the crew execution and returns the results.
-    """
+    
     inputs = {
         "topic": "AI LLMs",
         "current_year": str(datetime.now().year)
@@ -66,3 +70,4 @@ def test():
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
+"""
