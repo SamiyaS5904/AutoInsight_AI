@@ -7,7 +7,7 @@ import warnings
 
 from datetime import datetime
 
-from vc_agent.crew import VcAgent
+from vc_agent.first import VcAgent
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
