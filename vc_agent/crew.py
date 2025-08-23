@@ -1,36 +1,31 @@
-from crewai import Agent, Crew, Task, Process
-from crewai.llm import OpenAI
-import os
-from dotenv import load_dotenv
+from crewai import Agent, Task, Crew
+from langchain_openai import ChatOpenAI
 
-load_dotenv()  # to load OPENAI_API_KEY from .env
+# Initialize LLM
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
-# Define LLM (replace gpt-4 with your available model)
-llm = OpenAI(model="gpt-4", api_key=os.getenv("OPENAI_API_KEY"))
-
-# Define an Agent
-researcher = Agent(
-    role="Researcher",
-    goal="Find useful information",
-    backstory="You are great at researching things",
-    llm=llm,
-    verbose=True
+# Define Agent
+agent = Agent(
+    role="Helper",
+    goal="Answer user questions politely",
+    backstory="You are a helpful assistant who helps test CrewAI setup.",
+    llm=llm
 )
 
-# Define a Task
-research_task = Task(
-    description="Tell me a fun fact about space.",
-    agent=researcher
+# Define Task
+task = Task(
+    description="Say hello to the user and confirm setup is working",
+    expected_output="A friendly hello message confirming that CrewAI setup is working.",
+    agent=agent
 )
 
-# Create the Crew
+# Define Crew
 crew = Crew(
-    agents=[researcher],
-    tasks=[research_task],
-    process=Process.sequential,
-    verbose=True
+    agents=[agent],
+    tasks=[task]
 )
 
-# Run it
-result = crew.kickoff()
-print("Result:\n", result)
+# Run Crew
+if __name__ == "__main__":
+    result = crew.kickoff()
+    print("\n✅ Crew result:\n", result)
