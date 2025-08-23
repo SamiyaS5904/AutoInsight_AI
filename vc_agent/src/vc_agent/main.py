@@ -21,16 +21,17 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'input("Enter Cars to Compare(eg. Car A vs Car B)")',
+        'topic': input("Enter Cars to Compare(eg. Car A vs Car B)"),
         'current_year': str(datetime.now().year)
     }
     
     try:
-        VcAgent().crew().kickoff(inputs=inputs)      #input becomes tasks and become topic and then is used in agents.yaml
+        VcAgent().crew().kickoff(inputs=inputs)      #kickoff allows to run agents, input becomes tasks and become topic and then is used in agents.yaml
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
 # for this project we dont want to use all these remaining ones 
+
 """
 def train():
     
